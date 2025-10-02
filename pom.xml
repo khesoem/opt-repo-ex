@@ -1,0 +1,106 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>ch.ethz.ast</groupId>
+  <artifactId>opt-repo-ex</artifactId>
+  <packaging>jar</packaging>
+  <version>1.0-SNAPSHOT</version>
+  <name>opt-repo-ex</name>
+  <url>http://maven.apache.org</url>
+  <dependencies>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter</artifactId>
+      <version>5.10.2</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <properties>
+    <!-- JDK used for compilation -->
+    <maven.compiler.release>17</maven.compiler.release>
+  </properties>
+
+  <profiles>
+    <profile>
+      <id>tia</id>
+      <activation>
+        <property>
+          <name>tia</name>
+        </property>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <version>3.2.5</version>
+            <configuration>
+              <forkCount>1</forkCount>
+              <threadCount>1</threadCount>
+              <argLine>${surefireArgLine}</argLine>
+            </configuration>
+          </plugin>
+          <plugin>
+            <groupId>com.teamscale</groupId>
+            <artifactId>teamscale-maven-plugin</artifactId>
+            <version>35.2.2</version>
+            <executions>
+              <execution>
+                <id>teamscale-prepare-unit</id>
+                <phase>initialize</phase>
+                <goals>
+                  <goal>prepare-tia-unit-test</goal>
+                </goals>
+                <inherited>false</inherited>
+              </execution>
+              <execution>
+                <id>teamscale-report</id>
+                <phase>verify</phase>
+                <goals>
+                  <goal>testwise-coverage-report</goal>
+                </goals>
+                <inherited>false</inherited>
+              </execution>
+            </executions>
+            <configuration>
+              <propertyName>surefireArgLine</propertyName>
+              <runImpacted>false</runImpacted>
+              <runAllTests>true</runAllTests>
+              <includes>
+                <include>**ch.ethz.ast**</include>
+              </includes>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.13.0</version>
+        <configuration>
+          <release>${maven.compiler.release}</release>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>3.2.5</version>
+        <configuration>
+          <includes>
+            <include>**/*Test.java</include>
+          </includes>
+          <parallel>classes</parallel>
+          <useUnlimitedThreads>true</useUnlimitedThreads>
+        </configuration>
+      </plugin>
+
+    </plugins>
+  </build>
+</project>
