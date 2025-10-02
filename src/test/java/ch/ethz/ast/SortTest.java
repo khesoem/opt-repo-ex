@@ -17,14 +17,14 @@ class SortTest {
         for (int i = 0; i < arr.length; i++) {
             arr[i] = rand.nextInt();
         }
-        
+
         // Act
         sort.sort(arr);
-        
+
         // Assert - check that array is sorted in ascending order
         for (int i = 0; i < arr.length - 1; i++) {
-            assertTrue(arr[i] <= arr[i + 1], 
-                "Array is not sorted: arr[" + i + "] = " + arr[i] + " > arr[" + (i + 1) + "] = " + arr[i + 1]);
+            assertTrue(arr[i] <= arr[i + 1],
+                    "Array is not sorted: arr[" + i + "] = " + arr[i] + " > arr[" + (i + 1) + "] = " + arr[i + 1]);
         }
     }
 
