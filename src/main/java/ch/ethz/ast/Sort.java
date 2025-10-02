@@ -29,7 +29,7 @@ public class Sort
     }
 
     public void sort(int[] arr) {
-        bubbleSort(arr);
+        Arrays.sort(arr);
     }
     public static void main( String[] args ) {
     }
