@@ -1,6 +1,5 @@
 package ch.ethz.ast;
 
-import java.util.Collections;
 import java.util.List;
 
 public class Sort 
@@ -30,7 +29,7 @@ public class Sort
     }
 
     public void sort(List<Integer> arr) {
-        Collections.sort(arr, Collections.reverseOrder());
+        bubbleSort(arr);
     }
     public static void main( String[] args ) {
     }
