@@ -3,6 +3,10 @@ package ch.ethz.ast;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class SortTest {
@@ -12,19 +16,19 @@ class SortTest {
     void testSort() {
         // Arrange
         Sort sort = new Sort();
-        int[] arr = new int[30000];
-        java.util.Random rand = new java.util.Random();
-        for (int i = 0; i < arr.length; i++) {
-            arr[i] = rand.nextInt();
+        List<Integer> arr = new ArrayList<>();
+        Random rand = new Random();
+        for (int i = 0; i < 30000; i++) {
+            arr.add(rand.nextInt());
         }
 
         // Act
         sort.sort(arr);
 
-        // Assert - check that array is sorted in ascending order
-        for (int i = 0; i < arr.length - 1; i++) {
-            assertTrue(arr[i] <= arr[i + 1],
-                    "Array is not sorted: arr[" + i + "] = " + arr[i] + " > arr[" + (i + 1) + "] = " + arr[i + 1]);
+        // Assert - check that list is sorted in ascending order
+        for (int i = 0; i < arr.size() - 1; i++) {
+            assertTrue(arr.get(i) <= arr.get(i + 1),
+                    "List is not sorted: arr[" + i + "] = " + arr.get(i) + " > arr[" + (i + 1) + "] = " + arr.get(i + 1));
         }
     }
 
